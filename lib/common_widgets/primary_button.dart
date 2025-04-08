@@ -37,7 +37,6 @@ class PrimaryButton extends StatelessWidget {
             fontSize: fontSize,
             color: TColor.white,
             fontWeight: fontWeight,
-
           ),
         ),
       ),

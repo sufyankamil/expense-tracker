@@ -23,6 +23,7 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.sizeOf(context);
+
     return Scaffold(
       body: Stack(
         alignment: Alignment.topCenter,
