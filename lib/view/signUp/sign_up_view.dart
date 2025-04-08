@@ -49,7 +49,7 @@ class _SignUpViewState extends State<SignUpView> {
                   fit: BoxFit.contain,
                 ),
                 const Spacer(),
-                CommonTextfield(
+                CommonTextField(
                   controller: emailController,
                   labelText: "Email Address",
                   hintText: "Enter your email address",
@@ -58,7 +58,7 @@ class _SignUpViewState extends State<SignUpView> {
                   isPassword: false,
                 ),
                 const SizedBox(height: 10),
-                CommonTextfield(
+                CommonTextField(
                   controller: passwordController,
                   labelText: "Password",
                   hintText: "Enter your password",

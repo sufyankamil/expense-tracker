@@ -58,6 +58,63 @@ class _SignInViewState extends State<SignInView> {
     }
   }
 
+  void forgotPassword() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text("Reset Password"),
+          content: const Text(
+            "Would you like to reset your password?",
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text("Cancel"),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                confirmForgotPassword();
+              },
+              child: const Text("OK"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void confirmForgotPassword() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text("Reset Password"),
+          content: const Text(
+            "Please follow the instructions sent to your email to reset your password.",
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text("Cancel"),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text("OK"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   void dispose() {
     emailController.dispose();
@@ -86,7 +143,7 @@ class _SignInViewState extends State<SignInView> {
                   fit: BoxFit.contain,
                 ),
                 const Spacer(),
-                CommonTextfield(
+                CommonTextField(
                   controller: emailController,
                   labelText: "Email Address",
                   hintText: "Enter your email address",
@@ -99,7 +156,7 @@ class _SignInViewState extends State<SignInView> {
                     });
                   },
                 ),
-                CommonTextfield(
+                CommonTextField(
                   controller: passwordController,
                   labelText: "Password",
                   hintText: "Enter your password",
@@ -117,13 +174,19 @@ class _SignInViewState extends State<SignInView> {
                     Row(
                       children: [
                         Checkbox(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
                           value: isChecked,
+                          checkColor: TColor.primary,
+                          fillColor: WidgetStateProperty.all(TColor.white),
                           onChanged: (value) {
                             setState(() {
                               isChecked = value!;
                             });
                           },
-                          activeColor: isChecked ? TColor.primary : TColor.gray60,
+                          activeColor:
+                              isChecked ? TColor.primary : TColor.gray60,
                         ),
                         Text(
                           "Remember me",
@@ -137,7 +200,7 @@ class _SignInViewState extends State<SignInView> {
                     ),
                     const Spacer(),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () => forgotPassword(),
                       child: Text(
                         "Forgot Password?",
                         style: TextStyle(
@@ -154,12 +217,14 @@ class _SignInViewState extends State<SignInView> {
                   onTap: () async {
                     if (formKey.currentState!.validate()) {
                       await _saveCredentials();
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const LoginView(),
-                        ),
-                      );
+                      if (context.mounted) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LoginView(),
+                          ),
+                        );
+                      }
                     }
                   },
                   fontSize: 16,
@@ -170,7 +235,7 @@ class _SignInViewState extends State<SignInView> {
                   'Don\'t have an account?',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 12,
+                    fontSize: 14,
                     fontWeight: FontWeight.w400,
                     color: TColor.gray60,
                   ),
@@ -180,7 +245,9 @@ class _SignInViewState extends State<SignInView> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const SignUpView()),
+                      MaterialPageRoute(
+                        builder: (context) => const SignUpView(),
+                      ),
                     );
                   },
                   fontSize: 16,

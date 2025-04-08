@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 
 import '../../common/color_extension.dart';
 import '../../common_widgets/primary_button.dart';
+import '../signIn/sign_in_view.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -72,6 +73,12 @@ class _LoginViewState extends State<LoginView> {
                   SecondaryButton(
                     title: "Already have an account? Sign In",
                     onTap: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SignInView(),
+                        ),
+                      );
                     },
                     fontSize: 16,
                     fontWeight: FontWeight.w600,

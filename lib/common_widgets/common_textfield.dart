@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../common/color_extension.dart';
 
-class CommonTextfield extends StatelessWidget {
+class CommonTextField extends StatelessWidget {
   final TextEditingController controller;
   final String labelText;
   final String hintText;
@@ -12,7 +12,7 @@ class CommonTextfield extends StatelessWidget {
   final Function(String)? onChanged;
 
 
-  const CommonTextfield({super.key,
+  const CommonTextField({super.key,
     required this.controller,
     required this.labelText,
     required this.hintText,
@@ -35,6 +35,12 @@ class CommonTextfield extends StatelessWidget {
           obscuringCharacter: "*",
           cursorColor: TColor.primary,
           decoration: InputDecoration(
+            border: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: TColor.gray60,
+                width: 1,
+              ),
+            ),
             contentPadding: const EdgeInsets.only(left: 5),
             labelText: labelText,
             hintText: hintText,
@@ -46,9 +52,12 @@ class CommonTextfield extends StatelessWidget {
               fontSize: 14,
               color: TColor.gray60,
             ),
-            focusedBorder: InputBorder.none,
-            enabledBorder: InputBorder.none,
-            errorBorder: InputBorder.none,
+            focusedBorder:
+                OutlineInputBorder(borderSide: BorderSide(color: TColor.primary)),
+            enabledBorder:
+                OutlineInputBorder(borderSide: BorderSide(color: TColor.gray60)),
+            errorBorder:
+                OutlineInputBorder(borderSide: BorderSide(color: Colors.red)),
             icon: Padding(
               padding: const EdgeInsets.only(left: 8.0),
               child: Icon(

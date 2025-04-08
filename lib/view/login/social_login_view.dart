@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import '../../common_widgets/primary_button.dart';
 import '../../common_widgets/secondary_button.dart';
 
+import 'dart:io' show Platform;
+
 class SocialLoginView extends StatefulWidget {
   const SocialLoginView({super.key});
 
@@ -23,7 +25,7 @@ class _SocialLoginViewState extends State<SocialLoginView> {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
           child: Column(
-            spacing: 10,
+            spacing: 20,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image.asset(
@@ -32,38 +34,44 @@ class _SocialLoginViewState extends State<SocialLoginView> {
                 fit: BoxFit.contain,
               ),
               const Spacer(),
-              // Google Login Button
-              GestureDetector(
-                onTap: () {},
-                child: Container(
-                  height: 50,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    image: const DecorationImage(
-                      image: AssetImage("assets/img/google_btn.png"),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  alignment: Alignment.center,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    spacing: 10,
-                    children: [
-                      Image.asset("assets/img/google.png",width: 18, height: 20, color: TColor.gray,),
-                      Text(
-                        "Continue with Google",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: TColor.gray,
-                          fontWeight: FontWeight.w600,
+              Platform.isAndroid
+                  ? GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        image: const DecorationImage(
+                          image: AssetImage("assets/img/google_btn.png"),
+                          fit: BoxFit.cover,
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
+                      alignment: Alignment.center,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        spacing: 10,
+                        children: [
+                          Image.asset(
+                            "assets/img/google.png",
+                            width: 18,
+                            height: 20,
+                            color: TColor.gray,
+                          ),
+                          Text(
+                            "Continue with Google",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: TColor.gray,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                  : const SizedBox.shrink(),
               // FB Login Button
               GestureDetector(
                 onTap: () {},
@@ -82,7 +90,7 @@ class _SocialLoginViewState extends State<SocialLoginView> {
                     mainAxisSize: MainAxisSize.min,
                     spacing: 10,
                     children: [
-                      Image.asset("assets/img/fb.png",width: 18, height: 20,),
+                      Image.asset("assets/img/fb.png", width: 18, height: 20),
                       Text(
                         "Continue with Facebook",
                         textAlign: TextAlign.center,
@@ -96,40 +104,45 @@ class _SocialLoginViewState extends State<SocialLoginView> {
                   ),
                 ),
               ),
-              // Apple Login Button
-              GestureDetector(
-                onTap: () {},
-                child: Container(
-                  height: 50,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    image: const DecorationImage(
-                      image: AssetImage("assets/img/apple_btn.png"),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  alignment: Alignment.center,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    spacing: 10,
-                    children: [
-                      Image.asset("assets/img/apple.png",width: 18, height: 20,),
-                      Text(
-                        "Continue with Apple",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: TColor.white,
-                          fontWeight: FontWeight.w600,
+              Platform.isIOS
+                  ? GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        image: const DecorationImage(
+                          image: AssetImage("assets/img/apple_btn.png"),
+                          fit: BoxFit.cover,
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
+                      alignment: Alignment.center,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        spacing: 10,
+                        children: [
+                          Image.asset(
+                            "assets/img/apple.png",
+                            width: 18,
+                            height: 20,
+                          ),
+                          Text(
+                            "Continue with Apple",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: TColor.white,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                  : const SizedBox.shrink(),
               Padding(
-                padding: const EdgeInsets.only(top:8.0, bottom: 8.0),
+                padding: const EdgeInsets.only(top: 8.0, bottom: 18.0),
                 child: Text(
                   "or",
                   textAlign: TextAlign.center,
@@ -145,16 +158,23 @@ class _SocialLoginViewState extends State<SocialLoginView> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const SignUpView(),
-                    ),
+                    MaterialPageRoute(builder: (context) => const SignUpView()),
                   );
                 },
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
               ),
+              Text(
+                "Don't have an account?",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  color: TColor.gray60,
+                ),
+              ),
               SecondaryButton(
-                title: "Don't have an account? Sign Up",
+                title: "Sign Up",
                 onTap: () {
                   Navigator.push(
                     context,
