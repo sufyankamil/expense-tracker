@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../common/color_extension.dart';
+import '../../common_widgets/animation.dart';
 import '../../common_widgets/common_textfield.dart';
 import '../../common_widgets/primary_button.dart';
 import '../../common_widgets/secondary_button.dart';
@@ -143,6 +144,11 @@ class _SignInViewState extends State<SignInView> {
                   fit: BoxFit.contain,
                 ),
                 const Spacer(),
+                Expanded(
+                  child: RepaintBoundary(
+                    child: const AnimationView(),
+                  ),
+                ),
                 CommonTextField(
                   controller: emailController,
                   labelText: "Email Address",

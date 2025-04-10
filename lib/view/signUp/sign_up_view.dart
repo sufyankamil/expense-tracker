@@ -1,10 +1,11 @@
+import 'package:expense_tracker/view/home/home_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../common/color_extension.dart';
+import '../../common_widgets/animation.dart';
 import '../../common_widgets/common_textfield.dart';
 import '../../common_widgets/primary_button.dart';
 import '../../common_widgets/secondary_button.dart';
-import '../login/login_view.dart';
 import '../signIn/sign_in_view.dart';
 
 class SignUpView extends StatefulWidget {
@@ -32,6 +33,20 @@ class _SignUpViewState extends State<SignUpView> {
   Widget build(BuildContext context) {
     var size = MediaQuery.sizeOf(context);
 
+    void navigateToLogin() {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Account created successfully!'),
+          duration: Duration(seconds: 2),
+        ),
+      );
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => const HomeView()),
+        (Route<dynamic> route) => false,
+      );
+    }
+
     return Scaffold(
       backgroundColor: TColor.gray,
       body: SafeArea(
@@ -49,6 +64,7 @@ class _SignUpViewState extends State<SignUpView> {
                   fit: BoxFit.contain,
                 ),
                 const Spacer(),
+                Expanded(child: RepaintBoundary(child: const AnimationView())),
                 CommonTextField(
                   controller: emailController,
                   labelText: "Email Address",
@@ -74,27 +90,21 @@ class _SignUpViewState extends State<SignUpView> {
                         child: Container(
                           height: 5,
                           margin: const EdgeInsets.symmetric(horizontal: 1),
-                          decoration: BoxDecoration(
-                            color: TColor.gray70,
-                          ),
+                          decoration: BoxDecoration(color: TColor.gray70),
                         ),
                       ),
                       Expanded(
                         child: Container(
                           height: 5,
                           margin: const EdgeInsets.symmetric(horizontal: 1),
-                          decoration: BoxDecoration(
-                            color: TColor.gray70,
-                          ),
+                          decoration: BoxDecoration(color: TColor.gray70),
                         ),
                       ),
                       Expanded(
                         child: Container(
                           height: 5,
                           margin: const EdgeInsets.symmetric(horizontal: 1),
-                          decoration: BoxDecoration(
-                            color: TColor.gray70,
-                          ),
+                          decoration: BoxDecoration(color: TColor.gray70),
                         ),
                       ),
                     ],
@@ -104,16 +114,17 @@ class _SignUpViewState extends State<SignUpView> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text("Password must be at least 8 characters long and contain at least \n 1 uppercase letter, 1 lowercase letter, and 1 number.",
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                          color: TColor.gray60,
-                        ),
-                        textAlign: TextAlign.center,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        softWrap: true,
+                    Text(
+                      "Password must be at least 8 characters long and contain at least \n 1 uppercase letter, 1 lowercase letter, and 1 number.",
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        color: TColor.gray60,
+                      ),
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      softWrap: true,
                     ),
                   ],
                 ),
@@ -122,12 +133,7 @@ class _SignUpViewState extends State<SignUpView> {
                   title: "Create Account",
                   onTap: () {
                     if (formKey.currentState!.validate()) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const LoginView(),
-                        ),
-                      );
+                      navigateToLogin();
                     }
                   },
                   fontSize: 16,
@@ -148,7 +154,9 @@ class _SignUpViewState extends State<SignUpView> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const SignInView()),
+                      MaterialPageRoute(
+                        builder: (context) => const SignInView(),
+                      ),
                     );
                   },
                   fontSize: 16,

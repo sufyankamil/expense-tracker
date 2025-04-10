@@ -1,4 +1,5 @@
 import 'package:expense_tracker/common/color_extension.dart';
+import 'package:expense_tracker/common_widgets/animation.dart';
 import 'package:expense_tracker/view/signUp/sign_up_view.dart';
 import 'package:flutter/material.dart';
 
@@ -34,6 +35,11 @@ class _SocialLoginViewState extends State<SocialLoginView> {
                 fit: BoxFit.contain,
               ),
               const Spacer(),
+              Expanded(
+                child: RepaintBoundary(
+                  child: const AnimationView(),
+                ),
+              ),
               Platform.isAndroid
                   ? GestureDetector(
                     onTap: () {},
