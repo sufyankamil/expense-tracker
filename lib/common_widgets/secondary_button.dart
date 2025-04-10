@@ -24,6 +24,7 @@ class SecondaryButton extends StatelessWidget {
         height: 50,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
+          color: TColor.gray80,
         ),
         alignment: Alignment.center,
         child: Text(
