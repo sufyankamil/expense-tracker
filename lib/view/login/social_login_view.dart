@@ -1,4 +1,5 @@
 import 'package:expense_tracker/common/color_extension.dart';
+import 'package:expense_tracker/common/constants.dart';
 import 'package:expense_tracker/common_widgets/animation.dart';
 import 'package:expense_tracker/view/signUp/sign_up_view.dart';
 import 'package:flutter/material.dart';
@@ -30,16 +31,12 @@ class _SocialLoginViewState extends State<SocialLoginView> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image.asset(
-                "assets/img/app_logo.png",
+                AppConstants.logoImage,
                 width: size.width * 0.5,
                 fit: BoxFit.contain,
               ),
               const Spacer(),
-              Expanded(
-                child: RepaintBoundary(
-                  child: const AnimationView(),
-                ),
-              ),
+              Expanded(child: RepaintBoundary(child: const AnimationView())),
               Platform.isAndroid
                   ? GestureDetector(
                     onTap: () {},
@@ -59,13 +56,13 @@ class _SocialLoginViewState extends State<SocialLoginView> {
                         spacing: 10,
                         children: [
                           Image.asset(
-                            "assets/img/google.png",
+                            AppConstants.googleImg,
                             width: 18,
                             height: 20,
                             color: TColor.gray,
                           ),
                           Text(
-                            "Continue with Google",
+                            AppConstants.googleText,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 14,
@@ -86,7 +83,7 @@ class _SocialLoginViewState extends State<SocialLoginView> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
                     image: const DecorationImage(
-                      image: AssetImage("assets/img/fb_btn.png"),
+                      image: AssetImage(AppConstants.fbBtnImage),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -96,9 +93,9 @@ class _SocialLoginViewState extends State<SocialLoginView> {
                     mainAxisSize: MainAxisSize.min,
                     spacing: 10,
                     children: [
-                      Image.asset("assets/img/fb.png", width: 18, height: 20),
+                      Image.asset(AppConstants.fbImg, width: 18, height: 20),
                       Text(
-                        "Continue with Facebook",
+                        AppConstants.fbText,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 14,
@@ -110,6 +107,7 @@ class _SocialLoginViewState extends State<SocialLoginView> {
                   ),
                 ),
               ),
+
               Platform.isIOS
                   ? GestureDetector(
                     onTap: () {},
@@ -118,7 +116,7 @@ class _SocialLoginViewState extends State<SocialLoginView> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                         image: const DecorationImage(
-                          image: AssetImage("assets/img/apple_btn.png"),
+                          image: AssetImage(AppConstants.appleBtnImage),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -129,12 +127,12 @@ class _SocialLoginViewState extends State<SocialLoginView> {
                         spacing: 10,
                         children: [
                           Image.asset(
-                            "assets/img/apple.png",
+                            AppConstants.appleImg,
                             width: 18,
                             height: 20,
                           ),
                           Text(
-                            "Continue with Apple",
+                            AppConstants.appleText,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 14,
@@ -150,7 +148,7 @@ class _SocialLoginViewState extends State<SocialLoginView> {
               Padding(
                 padding: const EdgeInsets.only(top: 8.0, bottom: 18.0),
                 child: Text(
-                  "or",
+                  AppConstants.or,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 14,
@@ -160,7 +158,7 @@ class _SocialLoginViewState extends State<SocialLoginView> {
                 ),
               ),
               PrimaryButton(
-                title: "Sign up with Email",
+                title: AppConstants.emailText,
                 onTap: () {
                   Navigator.push(
                     context,
@@ -171,7 +169,7 @@ class _SocialLoginViewState extends State<SocialLoginView> {
                 fontWeight: FontWeight.w600,
               ),
               Text(
-                "Don't have an account?",
+                AppConstants.noAccount,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 14,
@@ -180,7 +178,7 @@ class _SocialLoginViewState extends State<SocialLoginView> {
                 ),
               ),
               SecondaryButton(
-                title: "Sign Up",
+                title: AppConstants.signUp,
                 onTap: () {
                   Navigator.push(
                     context,
@@ -191,7 +189,7 @@ class _SocialLoginViewState extends State<SocialLoginView> {
                 fontWeight: FontWeight.w600,
               ),
               Text(
-                'By continuing, you agree to our Terms of Service and Privacy Policy',
+                AppConstants.termsAndConditions,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 12,

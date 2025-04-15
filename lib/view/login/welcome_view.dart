@@ -1,3 +1,4 @@
+import 'package:expense_tracker/common/constants.dart';
 import 'package:expense_tracker/common_widgets/secondary_button.dart';
 import 'package:expense_tracker/view/login/social_login_view.dart';
 import 'package:flutter/material.dart';
@@ -7,14 +8,14 @@ import '../../common/color_extension.dart';
 import '../../common_widgets/primary_button.dart';
 import '../signIn/sign_in_view.dart';
 
-class LoginView extends StatefulWidget {
-  const LoginView({super.key});
+class WelcomeView extends StatefulWidget {
+  const WelcomeView({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  State<WelcomeView> createState() => _WelcomeViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
+class _WelcomeViewState extends State<WelcomeView> {
   @override
   void initState() {
     super.initState();
@@ -30,7 +31,7 @@ class _LoginViewState extends State<LoginView> {
         alignment: Alignment.topCenter,
         children: [
           Image.asset(
-            "assets/img/welcome_screen.png",
+            AppConstants.bgImage,
             width: size.width,
             height: size.height,
             fit: BoxFit.cover,
@@ -43,13 +44,13 @@ class _LoginViewState extends State<LoginView> {
                 spacing: 20,
                 children: [
                   Image.asset(
-                    "assets/img/app_logo.png",
+                    AppConstants.logoImage,
                     width: size.width * 0.5,
                     fit: BoxFit.contain,
                   ),
                   const Spacer(),
                   Text(
-                    "Welcome to Expense Tracker",
+                    AppConstants.appTitle,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 14,
@@ -58,8 +59,8 @@ class _LoginViewState extends State<LoginView> {
                     ),
                   ),
                   PrimaryButton(
-                    title: "Get Started",
-                    onTap: (){
+                    title: AppConstants.getStarted,
+                    onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -71,8 +72,8 @@ class _LoginViewState extends State<LoginView> {
                     fontWeight: FontWeight.w600,
                   ),
                   SecondaryButton(
-                    title: "Already have an account? Sign In",
-                    onTap: (){
+                    title: AppConstants.haveAccount,
+                    onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -83,7 +84,6 @@ class _LoginViewState extends State<LoginView> {
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),
-
                 ],
               ),
             ),
@@ -93,5 +93,3 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 }
-
-
