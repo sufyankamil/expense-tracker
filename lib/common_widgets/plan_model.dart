@@ -1,23 +1,18 @@
-import 'package:expense_tracker/common/constants.dart';
 import 'package:flutter/material.dart';
 
 import '../common/color_extension.dart';
 
-class InvestmentDetailsModal extends StatefulWidget {
+class PlanModel extends StatefulWidget {
   final String amount;
   final bool isProfit;
 
-  const InvestmentDetailsModal({
-    super.key,
-    required this.amount,
-    required this.isProfit,
-  });
+  const PlanModel({super.key, required this.amount, required this.isProfit});
 
   @override
-  InvestmentDetailsModalState createState() => InvestmentDetailsModalState();
+  PlanModelState createState() => PlanModelState();
 }
 
-class InvestmentDetailsModalState extends State<InvestmentDetailsModal> {
+class PlanModelState extends State<PlanModel> {
   late String currentAmount;
   late bool currentIsProfit;
 
@@ -53,7 +48,7 @@ class InvestmentDetailsModalState extends State<InvestmentDetailsModal> {
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: Text(
-                      "Investment Details",
+                      "My Assets",
                       style: TextStyle(
                         color: TColor.gray80,
                         fontSize: 24,
@@ -82,12 +77,13 @@ class InvestmentDetailsModalState extends State<InvestmentDetailsModal> {
                   Padding(
                     padding: const EdgeInsets.only(top: 12.0),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment:
+                          MainAxisAlignment.start, // Align left by default
                       children: [
                         Text(
                           currentAmount,
                           style: TextStyle(
-                            color: TColor.primary,
+                            color: TColor.gray80,
                             fontSize: 30,
                             fontWeight: FontWeight.w600,
                           ),
@@ -116,21 +112,53 @@ class InvestmentDetailsModalState extends State<InvestmentDetailsModal> {
                             ),
                           ],
                         ),
-                        Spacer(),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 18.0),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              setState(() {
-                                currentAmount = "\$2000";
-                                currentIsProfit = !currentIsProfit;
-                              });
-                            },
-                            child: Text(AppConstants.updateDetails),
-                          ),
-                        ),
                       ],
                     ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 30.0),
+                    child: Text(
+                      "Current Plans",
+                      style: TextStyle(
+                        color: TColor.gray80,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Container(
+                    height: 207,
+                    width: 360,
+                    margin: const EdgeInsets.only(left: 15.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Image.asset(
+                      "assets/img/plans01.png",
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    spacing: 10,
+                    children: [
+                      Text(
+                        "See all plans",
+                        style: TextStyle(
+                          color: Color(0XFFFE555D),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Icon(
+                        Icons.arrow_forward,
+                        color: Color(0XFFFE555D),
+                        size: 20,
+                        weight: 20,
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -142,7 +170,7 @@ class InvestmentDetailsModalState extends State<InvestmentDetailsModal> {
   }
 }
 
-void showDetails(BuildContext context, String amount, bool isProfit) {
+void showPlanDetails(BuildContext context, String amount, bool isProfit) {
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -153,7 +181,7 @@ void showDetails(BuildContext context, String amount, bool isProfit) {
     builder: (builder) {
       return PopScope(
         canPop: false,
-        child: InvestmentDetailsModal(amount: amount, isProfit: isProfit),
+        child: PlanModel(amount: amount, isProfit: isProfit),
       );
     },
   );

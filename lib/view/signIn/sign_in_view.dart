@@ -7,7 +7,7 @@ import '../../common_widgets/animation.dart';
 import '../../common_widgets/common_textfield.dart';
 import '../../common_widgets/primary_button.dart';
 import '../../common_widgets/secondary_button.dart';
-import '../login/login_view.dart';
+import '../home/home_view.dart';
 
 class SignInView extends StatefulWidget {
   const SignInView({super.key});
@@ -65,9 +65,7 @@ class _SignInViewState extends State<SignInView> {
       builder: (context) {
         return AlertDialog(
           title: const Text("Reset Password"),
-          content: const Text(
-            "Would you like to reset your password?",
-          ),
+          content: const Text("Would you like to reset your password?"),
           actions: [
             TextButton(
               onPressed: () {
@@ -144,11 +142,7 @@ class _SignInViewState extends State<SignInView> {
                   fit: BoxFit.contain,
                 ),
                 const Spacer(),
-                Expanded(
-                  child: RepaintBoundary(
-                    child: const AnimationView(),
-                  ),
-                ),
+                Expanded(child: RepaintBoundary(child: const AnimationView())),
                 CommonTextField(
                   controller: emailController,
                   labelText: "Email Address",
@@ -224,12 +218,22 @@ class _SignInViewState extends State<SignInView> {
                     if (formKey.currentState!.validate()) {
                       await _saveCredentials();
                       if (context.mounted) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const LoginView(),
-                          ),
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return const Center(
+                              child: CircularProgressIndicator.adaptive(),
+                            );
+                          },
                         );
+                        Future.delayed(const Duration(seconds: 3), () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const HomeView(),
+                            ),
+                          );
+                        });
                       }
                     }
                   },
